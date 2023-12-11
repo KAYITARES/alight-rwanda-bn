@@ -1,10 +1,13 @@
 import express from "express";
 import UserController from "../controller/usercontroller";
+import Validator from "../middlewares/validator";
+import DataChecker from "../middlewares/datachecker";
+import VerifyAccess from "../middlewares/verifyaccess";
 
 const router=express.Router()
 
-router.post("/",UserController.CreateUser)
-router.get("/",UserController.GetAllUser)
+router.post("/",DataChecker.UserRegisterEmpty,DataChecker.EmailExisting,Validator.UserAccountRule(),Validator.InputValidator,UserController.CreateUser)
+router.get("/",VerifyAccess("admin"),UserController.GetAllUser)
 router.delete("/",UserController.DeleteAllUser)
 router.get("/:id",UserController.GetOneUser)
 router.delete("/:id",UserController.DeleteOneUser)
