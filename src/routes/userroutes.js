@@ -7,7 +7,7 @@ import VerifyAccess from "../middlewares/verifyaccess";
 const router=express.Router()
 
 router.post("/",DataChecker.UserRegisterEmpty,DataChecker.EmailExisting,Validator.UserAccountRule(),Validator.InputValidator,UserController.CreateUser)
-router.get("/",VerifyAccess("admin"),UserController.GetAllUser)
+router.get("/",VerifyAccess("user"),UserController.GetAllUser)
 router.delete("/",UserController.DeleteAllUser)
 router.get("/:id",UserController.GetOneUser)
 router.delete("/:id",UserController.DeleteOneUser)
