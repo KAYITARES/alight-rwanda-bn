@@ -17,6 +17,10 @@ const programschema=new mongoose.Schema({
         type:String,
         required:true
     },
+    ProgramImage:{
+        type:Array,
+        required:true
+    },
     CreatedDate:{
         type:Date,
         default:Date.now()
