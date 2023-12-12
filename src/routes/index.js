@@ -1,7 +1,9 @@
-import express from "express";
-import userroutes from "./userroutes"
 
-const router=express.Router()
+import express from "express"
+import jobRoutes from './jobRoutes'
 
-router.use("/user",userroutes)
+
+const router=express.Router();
+router.use("/job",jobRoutes)
+
 export default router
