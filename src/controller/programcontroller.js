@@ -33,5 +33,38 @@ class ProgramController{
             return successmessage(res,201,`Programs successfuly deleted`)
         }
     }
+
+    static async GetOneProgram(req,res){
+        const id=req.params.id
+        const program=await PROGRAM.findById(id)
+            if(!program){
+                return errormessage(res,401,`Program with id ${id} not found`)
+            }
+            else{
+                return successmessage(res,201,`Program successfuly retrieved`,program)
+            }
+    }
+
+    static async DeleteOneProgram(req,res){
+        const id=req.params.id
+        const program=await PROGRAM.findByIdAndDelete(id)
+        if(!program){
+            return errormessage(res,401,`Program with id ${id} not deleted`)
+        }
+        else{
+            return successmessage(res,201,`Program successfuly deleted`)
+        }
+    }
+
+    static async UpdateProgram(req,res){
+        const id=req.params.id
+        const program=await PROGRAM.findByIdAndUpdate(id,req.body,{new:true})
+        if(!program){
+            return errormessage(res,401,`Program with id ${id} not updated`)
+        }
+        else{
+            return successmessage(res,401,`Program successfuly updated`,program)
+        }
+    }
 }
 export default ProgramController
