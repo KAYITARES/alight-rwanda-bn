@@ -1,5 +1,6 @@
 import mongoose from "mongoose";
 
+
 const userschema=new mongoose.Schema({
     FirstName:{
         type:String,
@@ -22,7 +23,7 @@ const userschema=new mongoose.Schema({
         required:true
     },
     RetypePassword:{
-        type:String,
+        type:String
     },
     Role:{
         type:String,
