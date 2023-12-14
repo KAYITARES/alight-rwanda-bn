@@ -1,6 +1,6 @@
 import mongoose from "mongoose";
 
-<<<<<<< HEAD:src/model/user.js
+
 const userschema=new mongoose.Schema({
     FirstName:{
         type:String,
@@ -23,40 +23,7 @@ const userschema=new mongoose.Schema({
         required:true
     },
     RetypePassword:{
-=======
-const jobSchema=new  mongoose.Schema({
-    JobTitle:{
-        type:String,
-        required:true,
-    },
-    JobName:{
-        type:String,
-        required:true
-    },
-    JobSummaryDescription:{
-        type:String,
-        required:true
-    },
-JobInfo:{
-        type:String,
-        required:true
-    },
-    Jobpicture:{
-        type:Array,
-     
-
-    },
-    JobLocation:{
-        type:String,
-        required:true
-    },
-    PublishedDate:{
-        type:String,
-        required:true
-    },
-    JobCriteria:{
->>>>>>> af1ed97 (job):src/model/job.js
-        type:String,
+       type:String 
     },
     Role:{
         type:String,
