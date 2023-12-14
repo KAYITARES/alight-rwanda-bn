@@ -65,3 +65,4 @@ required:true
  }   
 })
 const Applyjob=mongoose.model("Applyjob",jobApplySchema)
+export default Applyjob
