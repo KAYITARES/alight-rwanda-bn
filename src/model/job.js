@@ -13,7 +13,7 @@ const jobSchema=new  mongoose.Schema({
         type:String,
         required:true
     },
-JobInfo:{
+    JobAllInfo:{
         type:String,
         required:true
     },
