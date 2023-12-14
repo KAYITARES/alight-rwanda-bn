@@ -1,7 +1,9 @@
 import job from "../model/job";
 import errormessage from "../utils/errormessage";
 import successmessege from "../utils/successmessage";
+
 import jwt from "jsonwebtoken";
+
 
 
 class jobController{
@@ -28,11 +30,16 @@ class jobController{
         er;
       }
       static async getOnejob(req, res) {
+
         const id = req.params.id;
+
+        const id = req.params.ido;
+
         const jobs = await job.findById(id);
         if (!jobs) {
           return errormessage(res, 401, `no job found with that id : ${id}`);
         } else {
+
           return successmessege(res, 200, `job successfuly `, jobs);
         }
       
@@ -57,6 +64,9 @@ class jobController{
           errormessage(res, 401, `job with id ${id} not found`);
         } else {
           successmessege(res, 200, `job successfuly updated`, jobs);
+
+          return successmessege(res, 200, `job successfuly retrieved`, jobs);
+
         }
       }
 }

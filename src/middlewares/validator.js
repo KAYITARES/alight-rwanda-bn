@@ -18,8 +18,8 @@ class Validator{
                 check("FirstName","please write your FirstName correctly").trim().isAlpha(),
                 check("LastName","please write your LastName correctly").trim().isAlpha(),
                 check("UserName","please write your UserName correctly").trim().isAlpha(),
-                check("Email","please write your Email correctly").trim().isEmail(),
-                check("Password","please write your Password correctly").isStrongPassword(),
+                check("Email","please Email must be contains @gmail.com").trim().isEmail(),
+                check("Password","please make strong password").isStrongPassword(),
         ]
     }
 }
