@@ -1,6 +1,8 @@
 import job from "../model/job";
 import errormessage from "../utils/errormessage";
 import successmessege from "../utils/successmessage";
+import jwt from "jsonwebtoken";
+
 
 class jobController{
     static async createjob(req,res){
