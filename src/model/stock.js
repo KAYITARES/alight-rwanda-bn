@@ -9,18 +9,23 @@ const stockschema=new mongoose.Schema({
         type:String,
         required:true
     },
-    ProductQautity:{
+    Qauntity:{
         type:Number,
-        required:true
+        default:0
     },
     ProductExpires:{
         type:String,
         required:true
     },
+    ExportHistory:[{
+        Location:String,
+        Quantitys:Number,
+        TimeDelivery:Date
+    }],
     PostDate:{
         type:Date,
         default:Date.now()
     }
 })
-const STOCK=mongoose.model("STOCK",stockschema)
+const STOCK=mongoose.model("PRODUCT",stockschema)
 export default STOCK

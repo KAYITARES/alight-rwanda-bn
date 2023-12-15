@@ -3,29 +3,50 @@ import errormessage from "../utils/errormessage";
 import successmessage from "../utils/successmessage";
 
 class StockController{
-    static async PostProduct(req,res){
-        const stock=await STOCK.create(req.body)
-        if(!stock){
-            return errormessage(res,401,`Product not Posted`)
-        }
-        else{
-            return successmessage(res,201,`Product successfuly Posted`,stock)
+    static async ImportProduct(req,res){
+    const{ProductName,ProductPrice,Qauntity,ProductExpires}=req.body
+    const ExistingStock=await STOCK.findOne({ProductName})
+    if(ExistingStock){
+        ExistingStock.Qauntity += Qauntity;
+        await ExistingStock.save();
+        return successmessage(res,201,`Product successfuly Posted`,ExistingStock)
+    }
+    else{
+        const NewStock=await STOCK.create({ProductName,ProductPrice,Qauntity,ProductExpires})
+        return successmessage(res,201,`Product successfuly Posted`,NewStock)
+    }
+    }
+
+    static async Export(req,res){
+        const{ProductName,Qauntitys,Location}=req.body
+        const ExistingStock=await STOCK.findOne({ProductName})
+        if(ExistingStock){
+            if(ExistingStock.Qauntity >= Qauntitys){
+                ExistingStock.Qauntity -=Qauntitys
+                ExistingStock.ExportHistory.push({
+                    Location,
+                    Qauntitys,
+                    TimeDelivery:Date.now(),
+                })
+                await ExistingStock.save()
+                return successmessage(res,401,`product successfuly Exported`,ExistingStock)
+            }
         }
     }
 
     static async GetAllProduct(req,res){
-        const stock=await STOCK.find()
-        if(!stock){
+        const product=await STOCK.find()
+        if(!product){
             return errormessage(res,401,`Product not found`)
         }
         else{
-            return successmessage(res,201,`Product ${stock.length} successfuly retrieved`,stock)
+            return successmessage(res,201,`Product ${product.length} successfuly retrieved`,product)
         }
     }
 
     static async DeleteAllProduct(req,res){
-        const stock=await STOCK.deleteMany()
-        if(!stock){
+        const product=await STOCK.deleteMany()
+        if(!product){
             return errormessage(res,401,`Product not deleted`)
         }
         else{
@@ -35,19 +56,19 @@ class StockController{
 
     static async GetOneProduct(req,res){
         const id=req.params.id
-        const stock=await STOCK.findById(id)
-        if(!stock){
+        const product=await STOCK.findById(id)
+        if(!product){
             return errormessage(res,401,`Product with id ${id} not found`)
         }
         else{
-            return successmessage(res,201,`Product successfuly retrieved`,stock)
+            return successmessage(res,201,`Product successfuly retrieved`,product)
         }
     }
 
     static async DeleteOneProduct(req,res){
         const id=req.params.id
-        const stock=await STOCK.findByIdAndDelete(id)
-        if(!stock){
+        const product=await STOCK.findByIdAndDelete(id)
+        if(!product){
             return errormessage(res,401,`Product with id ${id} not deleted`)
         }
         else{
@@ -57,12 +78,12 @@ class StockController{
 
     static async UpdateProduct(req,res){
         const id=req.params.id
-        const stock=await STOCK.findByIdAndUpdate(id,req.body,{new:true})
-        if(!stock){
+        const product=await STOCK.findByIdAndUpdate(id,req.body,{new:true})
+        if(!product){
             return errormessage(res,401,`Product with id ${id} not found`)
         }
         else{
-            return successmessage(res,201,`Product successfuly updated`,stock)
+            return successmessage(res,201,`Product successfuly updated`,product)
         }
     }
 }

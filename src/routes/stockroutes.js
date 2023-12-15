@@ -3,7 +3,8 @@ import StockController from "../controller/stockcontroller";
 
 const router=express.Router()
 
-router.post("/",StockController.PostProduct)
+router.post("/",StockController.ImportProduct)
+router.post("/import",StockController.Export)
 router.get("/",StockController.GetAllProduct)
 router.delete("/",StockController.DeleteAllProduct)
 router.get("/:id",StockController.GetOneProduct)
