@@ -23,16 +23,19 @@ class StockController{
     }
 
     static async Export(req,res){
-        const{ProductName,Qauntitys,Location,Qauntit}=req.body
+        const{ProductName,ReqName,ReqPhone,ReqEmail,ReqLocation,ReqQauntity}=req.body
         try {
             const ExistingStock=await STOCK.findOne({ProductName})
             if(ExistingStock){
-                if(ExistingStock.Qauntity >= Qauntitys){
-                    ExistingStock.Qauntity -=Qauntitys
+                if(ExistingStock.Qauntity >= ReqQauntity){
+                    ExistingStock.Qauntity -=ReqQauntity
                     ExistingStock.ExportHistory.push({
-                        Location,
-                        Qauntitys,
-                        TimeDelivery:Date.now(),
+                        ReqName,
+                        ReqPhone,
+                        ReqEmail,
+                        ReqLocation,
+                        ReqQauntity,
+                        ReqTime:Date.now(),
                     })
                     await ExistingStock.save()
                     return successmessage(res,401,`product successfuly Exported`,ExistingStock.ExportHistory)

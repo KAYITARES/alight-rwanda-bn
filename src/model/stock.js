@@ -18,10 +18,12 @@ const stockschema=new mongoose.Schema({
         required:true
     },
     ExportHistory:[{
-        Location:String,
-        Quantitys:String,
-        Qauntit:String,
-        TimeDelivery:Date
+        ReqName:String,
+        ReqPhone:String,
+        ReqEmail:String,
+        ReqLocation:String,
+        ReqQauntity:Number,
+        ReqTime:Date
     }],
     PostDate:{
         type:Date,
