@@ -22,7 +22,7 @@ class StockController{
 
     }
 
-    static async Export(req,res){
+    static async ExportProduct(req,res){
         const{ProductName,ReqName,ReqPhone,ReqEmail,ReqLocation,ReqQauntity}=req.body
         try {
             const ExistingStock=await STOCK.findOne({ProductName})
@@ -30,6 +30,7 @@ class StockController{
                 if(ExistingStock.Qauntity >= ReqQauntity){
                     ExistingStock.Qauntity -=ReqQauntity
                     ExistingStock.ExportHistory.push({
+                        ProductName,
                         ReqName,
                         ReqPhone,
                         ReqEmail,
@@ -53,7 +54,18 @@ class StockController{
 
     }
 
-    static async GetAllProduct(req,res){
+    static async GetAllExportProduct(req,res){
+        const ExistingExport=await STOCK.find()
+        if(ExistingExport){
+            ExistingExport.ExportHistory
+            return successmessage(res,201,`Product Exported successfuly retrieved`,ExistingExport)
+            }
+        else{
+            return errormessage(res,500,`internal server error`)
+        }
+    }
+
+    static async GetAllStock(req,res){
         const product=await STOCK.find()
         if(!product){
             return errormessage(res,401,`Product not found`)
@@ -63,7 +75,7 @@ class StockController{
         }
     }
 
-    static async DeleteAllProduct(req,res){
+    static async DeleteAllStock(req,res){
         const product=await STOCK.deleteMany()
         if(!product){
             return errormessage(res,401,`Product not deleted`)

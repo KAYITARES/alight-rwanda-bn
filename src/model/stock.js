@@ -18,6 +18,7 @@ const stockschema=new mongoose.Schema({
         required:true
     },
     ExportHistory:[{
+        ProductName:String,
         ReqName:String,
         ReqPhone:String,
         ReqEmail:String,
