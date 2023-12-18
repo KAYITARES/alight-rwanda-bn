@@ -5,33 +5,49 @@ import successmessage from "../utils/successmessage";
 class StockController{
     static async ImportProduct(req,res){
     const{ProductName,ProductPrice,Qauntity,ProductExpires}=req.body
-    const ExistingStock=await STOCK.findOne({ProductName})
-    if(ExistingStock){
-        ExistingStock.Qauntity += Qauntity;
-        await ExistingStock.save();
-        return successmessage(res,201,`Product successfuly Posted`,ExistingStock)
+    try {
+        const ExistingStock=await STOCK.findOne({ProductName})
+        if(ExistingStock){
+            ExistingStock.Qauntity += Qauntity;
+            await ExistingStock.save();
+            return successmessage(res,201,`Product successfuly Posted`,ExistingStock)
+        }
+        else{
+            const NewStock=await STOCK.create({ProductName,ProductPrice,Qauntity,ProductExpires})
+            return successmessage(res,201,`Product successfuly Posted`,NewStock)
+        }
+    } catch (error) {
+        return errormessage(res,500,error)
     }
-    else{
-        const NewStock=await STOCK.create({ProductName,ProductPrice,Qauntity,ProductExpires})
-        return successmessage(res,201,`Product successfuly Posted`,NewStock)
-    }
+
     }
 
     static async Export(req,res){
-        const{ProductName,Qauntitys,Location}=req.body
-        const ExistingStock=await STOCK.findOne({ProductName})
-        if(ExistingStock){
-            if(ExistingStock.Qauntity >= Qauntitys){
-                ExistingStock.Qauntity -=Qauntitys
-                ExistingStock.ExportHistory.push({
-                    Location,
-                    Qauntitys,
-                    TimeDelivery:Date.now(),
-                })
-                await ExistingStock.save()
-                return successmessage(res,401,`product successfuly Exported`,ExistingStock)
+        const{ProductName,Qauntitys,Location,Qauntit}=req.body
+        try {
+            const ExistingStock=await STOCK.findOne({ProductName})
+            if(ExistingStock){
+                if(ExistingStock.Qauntity >= Qauntitys){
+                    ExistingStock.Qauntity -=Qauntitys
+                    ExistingStock.ExportHistory.push({
+                        Location,
+                        Qauntitys,
+                        TimeDelivery:Date.now(),
+                    })
+                    await ExistingStock.save()
+                    return successmessage(res,401,`product successfuly Exported`,ExistingStock.ExportHistory)
+                }
+                else{
+                    return errormessage(res,401,`we don't have enough stock`)
+                }
             }
+            else{
+                return errormessage(res,401,`product not found`)
+            }
+        } catch (error) {
+            return errormessage(res,500,error)
         }
+
     }
 
     static async GetAllProduct(req,res){

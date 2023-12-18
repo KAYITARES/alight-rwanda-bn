@@ -19,7 +19,8 @@ const stockschema=new mongoose.Schema({
     },
     ExportHistory:[{
         Location:String,
-        Quantitys:Number,
+        Quantitys:String,
+        Qauntit:String,
         TimeDelivery:Date
     }],
     PostDate:{
