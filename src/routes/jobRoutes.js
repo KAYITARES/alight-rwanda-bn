@@ -26,10 +26,4 @@ router.patch("/:id",verifyaccess("admin"),jobController.updatejob);
 
 
 
-const router=express.Router();
-router.post("/",jobController.createjob)
-router.get("/",jobController.getAlljob)
-router.get("/",jobController.getOnejob)
-
-
 export default router

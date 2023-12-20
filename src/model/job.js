@@ -16,6 +16,10 @@ const jobSchema=new  mongoose.Schema({
     },
 
     JobAllInformation:{
+        type:String,
+        required:true
+
+    },
 
     JobAllInfo:{
 
@@ -24,8 +28,6 @@ const jobSchema=new  mongoose.Schema({
     },
     Jobpicture:{
         type:Array,
-     
-
     },
     JobLocation:{
         type:String,
@@ -36,6 +38,9 @@ const jobSchema=new  mongoose.Schema({
         required:true
     },
     JobCriteria:{
+     type:String,
+     required:true   
+    },
 
     jobTitle:{
         type:String,
