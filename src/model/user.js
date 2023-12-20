@@ -23,15 +23,7 @@ const userschema=new mongoose.Schema({
         required:true
     },
     RetypePassword:{
-
-
-       
-
         type:String
-
-
-        type:String
-
     },
     Role:{
         type:String,

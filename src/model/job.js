@@ -15,12 +15,6 @@ const jobSchema=new  mongoose.Schema({
         required:true
     },
 
-    JobAllInformation:{
-        type:String,
-        required:true
-
-    },
-
     JobAllInfo:{
 
         type:String,
@@ -40,40 +34,6 @@ const jobSchema=new  mongoose.Schema({
     JobCriteria:{
      type:String,
      required:true   
-    },
-
-    jobTitle:{
-        type:String,
-        required:true,
-    },
-    jobName:{
-        type:String,
-        required:true
-    },
-    jobSummaryDescription:{
-        type:String,
-        required:true
-    },
-jobInfo:{
-        type:String,
-        required:true
-    },
-    jobpicture:{
-        type:String,
-        required:true
-
-    },
-    jobLocation:{
-        type:String,
-        required:true
-    },
-    publishedDate:{
-        type:String,
-        required:true
-    },
-    jobCriteria:{
-        type:String,
-        required:true
     },
     Applyjob: [
         {
