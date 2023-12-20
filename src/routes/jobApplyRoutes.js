@@ -6,8 +6,9 @@ import VerifyAccess from "../middlewares/verifyaccess";
 
 const router=express.Router()
 
-router.post("/",VerifyAccess("user"),jobApplyController.Applyjobed);
+router.post("/:id",VerifyAccess("user"),jobApplyController.Applyjobed);
 router.get("/",jobApplyController.getAllAppjob);
+router.delete("/:id",jobApplyController.deleteOnejobApply)
 
 
 export default router

@@ -13,7 +13,7 @@ const jobSchema=new  mongoose.Schema({
         type:String,
         required:true
     },
-JobInfo:{
+    JobAllInformation:{
         type:String,
         required:true
     },
@@ -33,8 +33,22 @@ JobInfo:{
     JobCriteria:{
         type:String,
         required:true
-    }
-  
-})
+    },
+    Applyjob: [
+        {
+          type: mongoose.Schema.Types.ObjectId,
+          ref: "Applyjob",
+        },
+      ],
+    });
+    jobSchema.pre(/^find/, function (next) {
+      this.populate({
+        path: "Applyjob",
+        select: "Applyjob postedAt",
+      })
+      next();
+    });
+    
+
 const job=mongoose.model("job",jobSchema)
 export default job

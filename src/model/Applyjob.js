@@ -62,7 +62,23 @@ required:true
  Howyougotthisjob:{
 type:String,
 required:true
- }   
+ },
+ postedAt:{
+    type:Date,
+    default: new Date(Date.now())
+},
+user:{
+    type:mongoose.Schema.Types.ObjectId,
+    ref:"User"
+
+},
+})
+jobApplySchema.pre(/^find/,function (next){
+this.populate({
+    path:"user",
+    select:"firstName lastName email"
+})
+next()
 })
 const Applyjob=mongoose.model("Applyjob",jobApplySchema)
 export default Applyjob

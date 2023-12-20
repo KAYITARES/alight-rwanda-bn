@@ -28,15 +28,19 @@ class jobController{
         er;
       }
       static async getOnejob(req, res) {
-        const id = req.params.id;
-        const jobs = await job.findById(id);
-        if (!jobs) {
-          return errormessage(res, 401, `no job found with that id : ${id}`);
-        } else {
-          return successmessege(res, 200, `job successfuly `, jobs);
+        const id = req.params.id
+        const jobs = await job.findById(id)
+       
+         try {
+           if (!jobs) {
+             return errormessage(res, 401, `jobs with id ${id} not found`);
+           } else {
+             return successmessege(res,200,`job found`,jobs)
+           }
+         } catch (error) {
+           return errormessage(res, 404, error);
+         }
         }
-      
-      }
       static async deleteAlljob(req, res) {
         const jobs = await job.deleteMany();
         return successmessege(res, 200, "all jobs is deleted", jobs);
