@@ -24,7 +24,11 @@ const userschema=new mongoose.Schema({
     },
     RetypePassword:{
 
+
        
+
+        type:String
+
 
         type:String
 

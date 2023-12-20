@@ -4,6 +4,10 @@ import successmessege from "../utils/successmessage";
 import jwt from "jsonwebtoken";
 
 
+import jwt from "jsonwebtoken";
+
+
+
 class jobController{
     static async createjob(req,res){
     const jobs=await job.create(req.body);
@@ -28,6 +32,7 @@ class jobController{
         er;
       }
       static async getOnejob(req, res) {
+
         const id = req.params.id
         const jobs = await job.findById(id)
        
@@ -40,6 +45,19 @@ class jobController{
          } catch (error) {
            return errormessage(res, 404, error);
          }
+
+
+        const id = req.params.id;
+
+        const id = req.params.ido;
+
+        const jobs = await job.findById(id);
+        if (!jobs) {
+          return errormessage(res, 401, `no job found with that id : ${id}`);
+        } else {
+
+          return successmessege(res, 200, `job successfuly `, jobs);
+
         }
       static async deleteAlljob(req, res) {
         const jobs = await job.deleteMany();
@@ -61,6 +79,9 @@ class jobController{
           errormessage(res, 401, `job with id ${id} not found`);
         } else {
           successmessege(res, 200, `job successfuly updated`, jobs);
+
+          return successmessege(res, 200, `job successfuly retrieved`, jobs);
+
         }
       }
 }
