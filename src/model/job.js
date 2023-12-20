@@ -32,6 +32,9 @@ const jobSchema=new  mongoose.Schema({
         required:true
     },
     JobCriteria:{
+        type:String,
+        required:true
+    },
 
     jobTitle:{
         type:String,
