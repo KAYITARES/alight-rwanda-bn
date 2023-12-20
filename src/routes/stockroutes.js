@@ -5,7 +5,6 @@ const router=express.Router()
 
 router.post("/import",StockController.ImportProduct)
 router.post("/export",StockController.ExportProduct)
-router.get("/export",StockController.GetAllExportProduct)
 router.get("/",StockController.GetAllStock)
 router.delete("/",StockController.DeleteAllStock)
 router.get("/:id",StockController.GetOneProduct)

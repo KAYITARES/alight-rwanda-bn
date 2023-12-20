@@ -21,7 +21,7 @@ class StockController{
     }
 
     }
-
+    
     static async ExportProduct(req,res){
         const{ProductName,ReqName,ReqPhone,ReqEmail,ReqLocation,ReqQauntity}=req.body
         try {
@@ -52,17 +52,6 @@ class StockController{
             return errormessage(res,500,error)
         }
 
-    }
-
-    static async GetAllExportProduct(req,res){
-        const ExistingExport=await STOCK.find()
-        if(ExistingExport){
-            ExistingExport.ExportHistory
-            return successmessage(res,201,`Product Exported successfuly retrieved`,ExistingExport)
-            }
-        else{
-            return errormessage(res,500,`internal server error`)
-        }
     }
 
     static async GetAllStock(req,res){
