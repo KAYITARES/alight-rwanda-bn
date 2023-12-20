@@ -8,6 +8,7 @@ import datachecker from "../middlewares/datachecker";
 
 
 const router=express.Router();
+
 router.post("/",verifyaccess("admin"),jobController.createjob);
 router.get("/",jobController.getAlljob);
 router.get("/:id",jobController.getOnejob);
@@ -16,10 +17,5 @@ router.delete("/:id",verifyaccess("admin"),jobController.deleteOnejob);
 router.patch("/:id",verifyaccess("admin"),jobController.updatejob);
 
 
-
-const router=express.Router();
-router.post("/",jobController.createjob)
-router.get("/",jobController.getAlljob)
-router.get("/",jobController.getOnejob)
 
 export default router
