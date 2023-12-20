@@ -33,7 +33,6 @@ class jobController{
 
         const id = req.params.id;
 
-        const id = req.params.ido;
 
         const jobs = await job.findById(id);
         if (!jobs) {
