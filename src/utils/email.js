@@ -7,11 +7,23 @@ const welcomeEmail=async(userinfo)=>{
         secure:true,
         auth:{
             user:process.env.EMAIL,
-            user:process.env.PASSWORD
+            pass:process.env.PASSWORD
         },
     });
-    let mailoption={
+    let mailoptions={
         from:process.env.EMAIL,
-        to:userinfo.email,
-    }
+        to:userinfo.Email,
+        subject:`${userinfo.FirstName} Login Done`,
+        html:`<p> Dear, <b>${userinfo.FirstName}</b></p><br><br>
+        <p> Your Login Successfuly Done!!!!! <br><br>${userinfo.FirstName} Thank your`
+    };
+    transport.sendMail(mailoptions,function(err,info){
+        if(err){
+            console.log(err)
+        }
+        else{
+            console.log(info)
+        }
+    });
 }
+export default welcomeEmail

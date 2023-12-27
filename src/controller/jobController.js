@@ -31,7 +31,7 @@ class jobController{
       }
       static async getOnejob(req, res) {
 
-        const id = req.params.id;
+      
 
         const id = req.params.ido;
 
