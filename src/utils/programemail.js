@@ -1,6 +1,6 @@
 import nodemailer from "nodemailer";
 
-const stockEmail=async(userinfo,productData)=>{
+const programEmail=async(userinfo,programData)=>{
     let transport=nodemailer.createTransport({
         host:"smtp.gmail.com",
         port:465,
@@ -13,9 +13,9 @@ const stockEmail=async(userinfo,productData)=>{
     let mailoptions={
         from:process.env.EMAIL,
         to:userinfo.Email,
-        subject:`Hello!! ${userinfo.FirstName},We Received new product in stock`,
-        html:`<p>Dear</p><p><b>${userinfo.FirstName}</b></p><p>You did know? we received new product in stock.<br><br>
-        you received<b> ${productData.ProductName}</b></p>`
+        subject:`Hello!! ${userinfo.FirstName},We Received new program`,
+        html:`<p>Dear</p><p><b>${userinfo.FirstName}</b></p><p> You did know? Alight apply new program<br><br>
+        you received<b> ${programData.ProgramName} program</b></p>`
     }
     transport.sendMail(mailoptions,function(err,info){
         if(err){
@@ -26,4 +26,4 @@ const stockEmail=async(userinfo,productData)=>{
         }
     })
 }
-export default stockEmail
+export default programEmail
