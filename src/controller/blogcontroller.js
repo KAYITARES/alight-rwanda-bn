@@ -32,5 +32,50 @@ class BlogController{
             return successmessage(res,201,`All Blogs successfuly deleted`)
         }
     }
+
+    static async Like(req,res){
+            const idparams=req.params.id
+            const blog=await BLOG.findById(idparams)
+            if(!blog){
+                return errormessage(res,401,`blog not found`)
+            }
+            else{
+                const userid=req.user._id
+                if(blog.Likes.includes(userid)){
+                    return errormessage(res,401,`you are already like this blog`)
+                }
+                else{
+                    if(blog.DisLikes.includes(userid)){
+                        blog.DisLikes.pull(userid)
+                    }
+                    blog.Likes.push(userid)
+                    blog.save()
+                    return successmessage(res,200,`Like from ${req.user.FirstName}`)
+                }
+
+            }
+    }
+
+    static async DisLike(req,res){
+        const idparams=req.params.id
+        const blog=await BLOG.findById(idparams)
+        if(!blog){
+            return errormessage(res,401,`blog not found`)
+        }
+        else{
+            const userid=req.user._id
+            if(blog.DisLikes.includes(userid)){
+                return errormessage(res,401,`you are already dislike this blog`)
+            }
+            else{
+                if(blog.Likes.includes(userid)){
+                    blog.Likes.pull(userid)
+                }
+                blog.DisLikes.push(userid)
+                blog.save()
+                return successmessage(res,200,`Dislike from ${req.user.FirstName}`)
+            }
+        }
+    }
 }
 export default BlogController

@@ -24,13 +24,21 @@ const BlogSchema=new mongoose.Schema({
     Comment:[{
         type:mongoose.Schema.Types.ObjectId,
         ref:"COMMENT"
+    }],
+    Likes:[{
+        type:mongoose.Schema.Types.ObjectId,
+        ref:"USER"
+    }],
+    DisLikes:[{
+        type:mongoose.Schema.Types.ObjectId,
+        ref:"USER"
     }]
 
 })
 BlogSchema.pre(/^find/,function(next){
     this.populate({
         path:"Comment",
-        select:"comment PostedDate"
+        select:"Comment PostedDate"
     })
     next()
 })
