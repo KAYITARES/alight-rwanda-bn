@@ -2,10 +2,10 @@
 import express from "express";
 import userroutes from "./userroutes"
 import jobRoutes from './jobRoutes'
-import jobApplyRoutes from "./jobApplyRoutes"
 import programroutes from "./programroutes";
 import testimonialroutes from "./testimonialroutes";
 import stockroutes from "./stockroutes";
+import applyroutes from "./applyroutes"
 
 const router=express.Router();
 
@@ -14,7 +14,8 @@ router.use("/user",userroutes)
 router.use("/program",programroutes)
 router.use("/testimonial",testimonialroutes)
 router.use("/stock",stockroutes)
-router.use("/Applyjob",jobApplyRoutes);
+router.use("/apply",applyroutes)
+
 
 
 

@@ -36,16 +36,23 @@ class jobController{
            if (!jobs) {
              return errormessage(res, 401, `jobs with id ${id} not found`);
            } else {
-             return successmessege(res,200,`jobs is store`,jobs)
+             return successmessege(res,200,`jobs is retrived`,jobs)
            }
          } catch (error) {
            return errormessage(res, 404, error);
          }
         }
+
       static async deleteAlljob(req, res) {
         const jobs = await job.deleteMany();
-        return successmessege(res, 200, "all jobs is deleted", jobs);
+        if(!jobs){
+          return errormessage(res,401,`jobs not deleted`)
+        }
+        else{
+          return successmessege(res,201,`all jobs successlfuly deleted`)
+        }
       }
+
       static async deleteOnejob(req, res) {
         const id = req.params.id;
         const jobs = await job.findByIdAndDelete(id);
@@ -55,6 +62,7 @@ class jobController{
           successmessege(res, 200, `job successfuly deleted`, jobs);
         }
       }
+      
       static async updatejob(req, res) {
         const id = req.params.id;
         const jobs = await job.findByIdAndUpdate(id, req.body);

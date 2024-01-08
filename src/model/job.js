@@ -27,29 +27,26 @@ const jobSchema=new  mongoose.Schema({
         type:String,
         required:true
     },
-    PublishedDate:{
-        type:String,
-        required:true
+    postedAt:{
+        type:Date,
+        default: new Date(Date.now())
     },
     JobCriteria:{
      type:String,
      required:true   
     },
-    Applyjob: [
-        {
-          type: mongoose.Schema.Types.ObjectId,
-          ref: "Applyjob",
-        },
-      ],
-    });
-    jobSchema.pre(/^find/, function (next) {
-      this.populate({
-        path: "Applyjob",
-        select: "Applyjob postedAt",
-      })
-      next();
-    });
+    jobapply:[{
+        type:mongoose.Schema.Types.ObjectId,
+        ref:"ApplyJob"
+    }]
+    })
+    jobSchema.pre(/^find/, function(next){
+        this.populate({
+            path:"jobapply",
+            select:"FirstName LastName"
+        })
+        next()
+    })
     
-
 const job=mongoose.model("job",jobSchema)
 export default job
