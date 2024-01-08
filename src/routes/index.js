@@ -4,7 +4,8 @@ import userroutes from "./userroutes";
 import programroutes from "./programroutes";
 import testimonialroutes from "./testimonialroutes";
 import stockroutes from "./stockroutes";
-import blogrouter from "./blogroutes"
+import blogrouter from "./blogroutes";
+import commentroutes from "./commentroutes"
 
 const router=express.Router();
 router.use("/user",userroutes)
