@@ -1,6 +1,8 @@
 import TESTIMONIAL from "../model/testimonial";
+import USER from "../model/user";
 import errormessage from "../utils/errormessage";
 import successmessage from "../utils/successmessage";
+import testimonialEmail from "../utils/testimonialemail";
 
 
 class TestimonialController{
@@ -10,6 +12,10 @@ class TestimonialController{
             return errormessage(res,401,`Testimonial  not Posted`)
         }
         else{
+            const test=await USER.find()
+            test.map((tests)=>{
+                testimonialEmail(tests,testimonial)
+            })
             return successmessage(res,201,`Testimonial successfuly Posted`,testimonial)
         }
     }

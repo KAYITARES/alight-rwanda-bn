@@ -30,13 +30,13 @@ class jobController{
         er;
       }
       static async getOnejob(req, res) {
-
         const id = req.params.id;
         try{
         if(id.length!==24 || id.length>24){
           return errormessage(res,401,'invalid id ')
         }
     
+
         const jobs = await job.findById(id);
         if (!jobs) {
           return errormessage(res, 401, `no job found with that id : ${id}`);
