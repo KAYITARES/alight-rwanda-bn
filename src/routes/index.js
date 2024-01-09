@@ -2,10 +2,11 @@
 import express from "express";
 import userroutes from "./userroutes";
 import programroutes from "./programroutes";
-import jobRoutes from './jobRoutes';
 import testimonialroutes from "./testimonialroutes";
 import stockroutes from "./stockroutes";
-import Applyroutes from "./applyroutes"
+import Applyroutes from "./applyroutes";
+import jobRoutes from "./jobRoutes"
+
 
 
 
