@@ -2,39 +2,38 @@ import mongoose from "mongoose";
 
 const jobSchema=new  mongoose.Schema({
 
-    JobTitle:{
+    jobTitle:{
         type:String,
         required:true,
     },
-    JobName:{
+    jobSummaryDescription:{
         type:String,
         required:true
     },
-    JobSummaryDescription:{
+    jobAllInfo:{
         type:String,
         required:true
     },
-    JobAllInfo:{
-        type:String,
-        required:true
-    },
-    Jobpicture:{
+    jobpicture:{
         type:Array,
-     
+    },
+    jobLocation:{
+        type:String,
+        required:true
+    },
+    jobCriteria:{
+        type:String,
+        required:true
+    },
+    publisherDate:{
+        type:Date,
+        default: new Date(Date.now())
+    },
 
-    },
-    JobLocation:{
-        type:String,
-        required:true
-    },
-    PublishedDate:{
-        type:String,
-        required:true
-    },
-    JobCriteria:{
-        type:String,
-        required:true
-    },
+    deadLine:{
+        type:Date,
+        default: new Date(Date.now())
+    }
 
    
 })
