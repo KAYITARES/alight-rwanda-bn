@@ -30,6 +30,8 @@ class jobController{
         er;
       }
       static async getOnejob(req, res) {
+        const id = req.params.id;
+
 
 
         const jobs = await job.findById(id);
