@@ -9,16 +9,11 @@ import jobRoutes from "./jobRoutes"
 
 
 
-
-
-
 const router=express.Router();
 router.use("/user",userroutes)
 
 router.use("/job",jobRoutes);
 router.use("/apply",Applyroutes)
-
-
 router.use("/program",programroutes)
 router.use("/testimonial",testimonialroutes)
 router.use("/stock",stockroutes)

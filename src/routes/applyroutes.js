@@ -6,8 +6,6 @@ const router = express.Router()
 
 router.post("/:id",ApplyJobController.ApplyOneJob);
 router.get("/",ApplyJobController.getAllApplyjob);
-router.get("/:id",VerifyAccess("admin"),ApplyJobController.getOnejobApply);
-router.delete("/",VerifyAccess("admin"),ApplyJobController.deleteAlljobapply);
-router.delete("/:id",VerifyAccess("admin"),ApplyJobController.deleteOnejobapply);
+
 
 export default router
