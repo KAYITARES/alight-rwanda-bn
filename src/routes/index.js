@@ -5,7 +5,8 @@ import programroutes from "./programroutes";
 import jobRoutes from './jobRoutes';
 import testimonialroutes from "./testimonialroutes";
 import stockroutes from "./stockroutes";
-import ApplyjobRoutes from "./jobApplyRoutes";
+import Applyroutes from "./applyroutes"
+
 
 
 
@@ -14,7 +15,8 @@ const router=express.Router();
 router.use("/user",userroutes)
 
 router.use("/job",jobRoutes);
-router.use("/Applyjob",ApplyjobRoutes)
+router.use("/apply",Applyroutes)
+
 
 router.use("/program",programroutes)
 router.use("/testimonial",testimonialroutes)
