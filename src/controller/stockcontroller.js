@@ -1,6 +1,8 @@
 import STOCK from "../model/stock";
 import errormessage from "../utils/errormessage";
 import successmessage from "../utils/successmessage";
+import USER from "../model/user";
+import stockEmail from "../utils/stockemail";
 
 class StockController{
     static async ImportProduct(req,res){
@@ -14,6 +16,10 @@ class StockController{
         }
         else{
             const NewStock=await STOCK.create({ProductName,ProductPrice,Qauntity,ProductExpires})
+            const user=await USER.find()
+            user.map((users)=>{
+                stockEmail(users,NewStock)
+            })
             return successmessage(res,201,`Product successfuly Posted`,NewStock)
         }
     } catch (error) {
