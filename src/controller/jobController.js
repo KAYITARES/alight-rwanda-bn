@@ -31,8 +31,11 @@ class jobController{
       }
       static async getOnejob(req, res) {
         const id = req.params.id;
-
-
+        try{
+        if(id.length!==24 || id.length>24){
+          return errormessage(res,401,'invalid id ')
+        }
+    
 
         const jobs = await job.findById(id);
         if (!jobs) {
@@ -41,6 +44,9 @@ class jobController{
 
           return successmessege(res, 200, `job successfuly `, jobs);
         }
+      }catch (error) {
+        return errormessage(res, 403, error);
+      }
       
       }
       static async deleteAlljob(req, res) {
@@ -49,6 +55,9 @@ class jobController{
       }
       static async deleteOnejob(req, res) {
         const id = req.params.id;
+        if(id.length!==24 || id.length>24){
+          return errormessage(res,401,'invalid id ')
+        }
         const jobs = await job.findByIdAndDelete(id);
         if (!jobs) {
           errormessage(res, 401, `job with id ${id} not found`);
@@ -58,6 +67,9 @@ class jobController{
       }
       static async updatejob(req, res) {
         const id = req.params.id;
+        if(id.length!==24 || id.length>24){
+          return errormessage(res,401,'invalid id ')
+        }
         const jobs = await job.findByIdAndUpdate(id, req.body);
         if (!jobs) {
           errormessage(res, 401, `job with id ${id} not found`);

@@ -15,7 +15,7 @@ const jobSchema=new  mongoose.Schema({
         required:true
     },
     jobpicture:{
-        type:Array,
+        type:String,
     },
     jobLocation:{
         type:String,
@@ -25,17 +25,29 @@ const jobSchema=new  mongoose.Schema({
         type:String,
         required:true
     },
+    deadLine:{
+        type:Date,
+        required:true
+    },
+
     publisherDate:{
         type:Date,
         default: new Date(Date.now())
     },
-
-    deadLine:{
-        type:Date,
-        default: new Date(Date.now())
-    }
-
+    jobapply:[
+        {
+          type: mongoose.Schema.Types.ObjectId,
+          ref: "ApplyJob",
+        }
+      ],
    
+   
+})
+jobSchema.pre(/^find/,function(next){
+    this.populate({
+        path:"jobapply"
+    })
+    next()
 })
 const job=mongoose.model("job",jobSchema)
 export default job

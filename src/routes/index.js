@@ -9,6 +9,7 @@ import jobRoutes from "./jobRoutes"
 import blogrouter from "./blogroutes";
 import commentroutes from "./commentroutes"
 
+
 const router=express.Router();
 router.use("/user",userroutes)
 router.use("/job",jobRoutes);
