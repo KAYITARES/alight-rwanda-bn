@@ -5,31 +5,101 @@ import successmessage from "../utils/successmessage";
 class BlogController{
     static async CreateBlog(req,res,){
         const blog=await BLOG.create(req.body)
-        if(!blog){
-            return errormessage(res,401,`Blogs not posted`)
+        try {
+            if(!blog){
+                return errormessage(res,401,`Blogs not posted`)
+            }
+            else{
+                return successmessage(res,201,`Blogs  successfuly posted`,blog)
+            }
+        } catch (error) {
+            return errormessage(res,500,error)
         }
-        else{
-            return successmessage(res,201,`Blogs  successfuly posted`,blog)
-        }
+
     }
 
     static async GetAllBlog(req,res){
         const blog=await BLOG.find()
-        if(!blog){
-            return errormessage(res,401,`Blogs not found`)
+        try {
+            if(!blog){
+                return errormessage(res,401,`Blogs not found`)
+            }
+            else{
+                return successmessage(res,201,`All Blogs ${blog.length} successfuly retrieved`,blog)
+            }
+        } catch (error) {
+            return errormessage(res,500,error)
         }
-        else{
-            return successmessage(res,201,`All Blogs ${blog.length} successfuly retrieved`,blog)
-        }
+
     }
 
     static async DeleteAllBLogs(req,res){
         const blog=await BLOG.deleteMany()
-        if(!blog){
-            return errormessage(res,401,`Blogs not deleted`)
+        try {
+            if(!blog){
+                return errormessage(res,401,`Blogs not deleted`)
+            }
+            else{
+                return successmessage(res,201,`All Blogs successfuly deleted`)
+            }
+        } catch (error) {
+            return errormessage(res,500,error)
         }
-        else{
-            return successmessage(res,201,`All Blogs successfuly deleted`)
+
+    }
+
+    static async getOneBlog(req,res){
+        const blogid=req.params.id
+        try {
+            if(blogid.length !== 24 || blogid.length < 24){
+                return errormessage(res,401,`invalid id`)
+            }
+            const blog=await BLOG.findById(blogid)
+            if(!blog){
+                return errormessage(res,401,`blog with id ${blogid} not found`)
+            }
+            else{
+                return successmessage(res,200,`blog successfuly retrieved`,blog)
+            }
+        } catch (error) {
+            return errormessage(res,500,error)
+        }
+    }
+
+    static async deleteOneBlog(req,res){
+        const blogid=req.params.id
+        try {
+            if(blogid.length !== 24 || blogid.length < 24){
+                return errormessage(res,401,`invalid id`)
+            }
+            const blog=await BLOG.findByIdAndDelete(blogid)
+            if(!blog){
+                return errormessage(res,401,`job with id ${blog} not deleted`)
+            }
+            else{
+                return successmessage(res,200,`blog successfuly deleted`)
+            }
+        } catch (error) {
+            return errormessage(res,500,error)
+            
+        }
+    }
+
+    static async updateBlog(req,res){
+        const blogid=req.params.id
+        try {
+            if(blogid.length !== 24 || blogid <24){
+                return errormessage(res,401,`invalid id`)
+            }
+            const blog=await BLOG.findByIdAndUpdate(blogid,req.body,{new:true})
+            if(!blog){
+                return errormessage(res,401,`blog with that id ${blogid} not found`)
+            }
+            else{
+                return successmessage(res,200,`blog successfuly updated`,blog)
+            }
+        } catch (error) {
+            return errormessage(res,500,error)
         }
     }
 
