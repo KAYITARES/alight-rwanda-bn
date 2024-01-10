@@ -27,7 +27,7 @@ class jobController{
           const data = jobs;
           return successmessege(res, status, msg, data);
         }
-        er;
+      
       }
       static async getOnejob(req, res) {
 
@@ -74,9 +74,8 @@ class jobController{
         if (!jobs) {
           errormessage(res, 401, `job with id ${id} not found`);
         } else {
-          successmessege(res, 200, `job successfuly updated`, jobs);
 
-          return successmessege(res, 200, `job successfuly retrieved`, jobs);
+          return successmessege(res, 200, `job successfuly update`, jobs);
 
         }
       }
