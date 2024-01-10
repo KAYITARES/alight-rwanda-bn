@@ -7,7 +7,8 @@ import stockroutes from "./stockroutes";
 import Applyroutes from "./applyroutes";
 import jobRoutes from "./jobRoutes"
 import blogrouter from "./blogroutes";
-import commentroutes from "./commentroutes"
+import commentroutes from "./commentroutes";
+
 
 
 const router=express.Router();
@@ -19,6 +20,7 @@ router.use("/testimonial",testimonialroutes)
 router.use("/comment",commentroutes)
 router.use("/stock",stockroutes)
 router.use("/blog",blogrouter)
+
 
 
 
