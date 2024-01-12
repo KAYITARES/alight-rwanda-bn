@@ -31,7 +31,7 @@ class ApplyJobController{
         const data = jobapply;
         return successmessage(res, status, msg, data);
       }
-      er;
+     
     }
    
      
