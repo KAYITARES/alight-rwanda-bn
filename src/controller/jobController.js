@@ -1,9 +1,7 @@
 import job from "../model/job";
 import errormessage from "../utils/errormessage";
 import successmessege from "../utils/successmessage";
-
 import jwt from "jsonwebtoken";
-
 
 
 class jobController{
@@ -30,12 +28,24 @@ class jobController{
       
       }
       static async getOnejob(req, res) {
+        const id = req.params.id
+        const jobs = await job.findById(id)
+       
+         try {
+           if (!jobs) {
+             return errormessage(res, 401, `jobs with id ${id} not found`);
+           } else {
+             return successmessege(res,200,`jobs is retrived`,jobs)
+           }
+         } catch (error) {
+           return errormessage(res, 404, error);
+         }
+        }
         const id = req.params.id;
         try{
         if(id.length!==24 || id.length>24){
           return errormessage(res,401,'invalid id ')
         }
-    
 
         const jobs = await job.findById(id);
         if (!jobs) {
@@ -51,8 +61,14 @@ class jobController{
       }
       static async deleteAlljob(req, res) {
         const jobs = await job.deleteMany();
-        return successmessege(res, 200, "all jobs is deleted", jobs);
+        if(!jobs){
+          return errormessage(res,401,`jobs not deleted`)
+        }
+        else{
+          return successmessege(res,201,`all jobs successlfuly deleted`)
+        }
       }
+
       static async deleteOnejob(req, res) {
         const id = req.params.id;
         if(id.length!==24 || id.length>24){
@@ -65,6 +81,7 @@ class jobController{
           successmessege(res, 200, `job successfuly deleted`, jobs);
         }
       }
+      
       static async updatejob(req, res) {
         const id = req.params.id;
         if(id.length!==24 || id.length>24){
