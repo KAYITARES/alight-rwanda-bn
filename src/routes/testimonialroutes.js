@@ -10,6 +10,6 @@ router.get("/",TestimonialController.GetAllTestimonial)
 router.delete("/",VerifyAccess("admin"),TestimonialController.DeleteAllTestimonial)
 router.get("/:id",TestimonialController.GetOneTestimonial)
 router.delete("/:id",VerifyAccess("admin"),TestimonialController.DeleteOneTestimonial)
-router.patch("/:id",VerifyAccess("user"),TestimonialController.UpdateTestimonial)
+router.patch("/:id",VerifyAccess("admin"),TestimonialController.UpdateTestimonial)
 
 export default router
