@@ -5,7 +5,12 @@ const jobSchema=new  mongoose.Schema({
         type:String,
         required:true,
     },
-    jobSummaryDescription:{
+    jobOrganisation:{
+        type:String,
+        required:true
+        
+    },
+    jobPosition:{
         type:String,
         required:true
     },
@@ -15,6 +20,7 @@ const jobSchema=new  mongoose.Schema({
     },
     jobpicture:{
         type:String,
+        required:true
     },
     jobLocation:{
         type:String,

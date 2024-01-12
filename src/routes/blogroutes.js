@@ -5,7 +5,7 @@ import verifyAccessUsers from "../middlewares/verifyaccessusers";
 
 const router=express.Router()
 
-router.post("/",verifyAccessUsers,BlogController.CreateBlog)
+router.post("/",verifyAccess("admin"),BlogController.CreateBlog)
 router.get("/",BlogController.GetAllBlog)
 router.delete("/",verifyAccess("admin"),BlogController.DeleteAllBLogs)
 router.get("/:id",BlogController.getOneBlog)
