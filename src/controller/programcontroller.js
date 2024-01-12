@@ -1,5 +1,7 @@
 import PROGRAM from "../model/program";
+import USER from "../model/user";
 import errormessage from "../utils/errormessage";
+import programEmail from "../utils/programemail";
 import successmessage from "../utils/successmessage";
 
 
@@ -10,6 +12,10 @@ class ProgramController{
             return errormessage(res,401,`Program not Posted`)
         }
         else{
+            const programs=await USER.find()
+            programs.map((pro)=>{
+            programEmail(pro,program)
+            })
             return successmessage(res,201,`Program successfuly Posted`,program)
         }
     }

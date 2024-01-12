@@ -25,10 +25,9 @@ class jobController{
           const data = jobs;
           return successmessege(res, status, msg, data);
         }
-        er;
+      
       }
       static async getOnejob(req, res) {
-
         const id = req.params.id
         const jobs = await job.findById(id)
        
@@ -42,7 +41,24 @@ class jobController{
            return errormessage(res, 404, error);
          }
         }
+        const id = req.params.id;
+        try{
+        if(id.length!==24 || id.length>24){
+          return errormessage(res,401,'invalid id ')
+        }
 
+        const jobs = await job.findById(id);
+        if (!jobs) {
+          return errormessage(res, 401, `no job found with that id : ${id}`);
+        } else {
+
+          return successmessege(res, 200, `job successfuly `, jobs);
+        }
+      }catch (error) {
+        return errormessage(res, 403, error);
+      }
+      
+      }
       static async deleteAlljob(req, res) {
         const jobs = await job.deleteMany();
         if(!jobs){
@@ -55,6 +71,9 @@ class jobController{
 
       static async deleteOnejob(req, res) {
         const id = req.params.id;
+        if(id.length!==24 || id.length>24){
+          return errormessage(res,401,'invalid id ')
+        }
         const jobs = await job.findByIdAndDelete(id);
         if (!jobs) {
           errormessage(res, 401, `job with id ${id} not found`);
@@ -65,13 +84,15 @@ class jobController{
       
       static async updatejob(req, res) {
         const id = req.params.id;
+        if(id.length!==24 || id.length>24){
+          return errormessage(res,401,'invalid id ')
+        }
         const jobs = await job.findByIdAndUpdate(id, req.body);
         if (!jobs) {
           errormessage(res, 401, `job with id ${id} not found`);
         } else {
-          successmessege(res, 200, `job successfuly updated`, jobs);
 
-          return successmessege(res, 200, `job successfuly retrieved`, jobs);
+          return successmessege(res, 200, `job successfuly update`, jobs);
 
         }
       }

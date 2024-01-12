@@ -31,6 +31,7 @@ class ApplyJobController{
         return successmessage(res, status, msg, data);
       }
      
+
     }
    
      
