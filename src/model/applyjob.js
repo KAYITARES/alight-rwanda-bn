@@ -1,10 +1,6 @@
 import mongoose from "mongoose";
 
 const ApplyJobSchema=new mongoose.Schema({
-    jobs:{
-        type:mongoose.Schema.Types.ObjectId,
-        ref:"job"
-    },
     FirstName:{
         type:String,
         required:true
@@ -43,25 +39,31 @@ const ApplyJobSchema=new mongoose.Schema({
      },
     Sex:{
         type:String,
-    enum:["male","female"],
+        enum:["male","female"],
+        default:"male"
      },
     CurrentPosition:{
          type:String,
          required:true
      },
-     MarriedorSingle:{
+     Matialstatus:{
          type:String,
-         required:true
+         enum:["married","single"],
+         default:"married"
+     
      },
      UploadCV:{
          type:String,
          required:true
-     }
+     },   
+    jobs:{
+        type:mongoose.Schema.Types.ObjectId,
+        ref:"job"
+    },
 })
 ApplyJobSchema.pre(/^find/, function(next){
     this.populate({
         path:"jobs",
-        select:"JobTitle JobName"
     })
     next()
 });
