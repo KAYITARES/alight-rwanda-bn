@@ -2,28 +2,28 @@ import mongoose from "mongoose";
 
 const jobSchema=new  mongoose.Schema({
 
-    JobTitle:{
+    jobTitle:{
         type:String,
         required:true,
     },
-    JobName:{
+    jobName:{
         type:String,
         required:true
     },
-    JobSummaryDescription:{
+    jobSummaryDescription:{
         type:String,
         required:true
     },
 
-    JobAllInfo:{
+    jobAllInfo:{
 
         type:String,
         required:true
     },
-    Jobpicture:{
+    jobPicture:{
         type:Array,
     },
-    JobLocation:{
+    jobLocation:{
         type:String,
         required:true
     },
@@ -31,7 +31,7 @@ const jobSchema=new  mongoose.Schema({
         type:Date,
         default: new Date(Date.now())
     },
-    JobCriteria:{
+    jobCriteria:{
      type:String,
      required:true   
     },
