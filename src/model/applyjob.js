@@ -48,7 +48,7 @@ const ApplyJobSchema=new mongoose.Schema({
      },
      Matialstatus:{
          type:String,
-         enum:["married","unmarried"],
+         enum:["married","single"],
          default:"married"
      
      },

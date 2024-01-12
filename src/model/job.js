@@ -1,7 +1,6 @@
 import mongoose from "mongoose";
 
 const jobSchema=new  mongoose.Schema({
-
     jobTitle:{
         type:String,
         required:true,
@@ -46,8 +45,7 @@ const jobSchema=new  mongoose.Schema({
           ref: "ApplyJob",
         }
       ],
-   
-   
+  
 })
 jobSchema.pre(/^find/,function(next){
     this.populate({

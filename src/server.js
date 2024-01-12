@@ -3,9 +3,10 @@ import mongoose from "mongoose";
 import dotenv from "dotenv";
 import bodyParser from "body-parser";
 import router from "./routes/index.js";
-
+import cors from 'cors'
 
 const app=express()
+app.use(cors());
 dotenv.config()
 app.use(bodyParser.json())
 app.use("/api/v1",router)
