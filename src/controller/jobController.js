@@ -1,11 +1,6 @@
 import job from "../model/job";
 import errormessage from "../utils/errormessage";
 import successmessege from "../utils/successmessage";
-<<<<<<< HEAD
-
-=======
-import jwt from "jsonwebtoken";
->>>>>>> main
 
 
 class jobController{
@@ -57,50 +52,15 @@ class jobController{
            return errormessage(res, 404, error);
          }
         }
-        const id = req.params.id;
-        try{
-        if(id.length!==24 || id.length>24){
-          return errormessage(res,401,'invalid id ')
-        }
-<<<<<<< HEAD
-=======
-
->>>>>>> main
-        const jobs = await job.findById(id);
-        if (!jobs) {
-          return errormessage(res, 401, `no job found with that id : ${id}`);
-        } else {
-
-          return successmessege(res, 200, `job successfuly `, jobs);
-        }
-      }catch (error) {
-        return errormessage(res,500, error);
-      }
-      
-      }
 
       static async deleteAlljob(req, res) {
         const jobs = await job.deleteMany();
-<<<<<<< HEAD
-        try {
-          if(!jobs){
-            return errormessage(res,401,`job not deleted`)
-          }
-          else{
-            return successmessege(res, 200, "all jobs is deleted", jobs);
-          }
-        } catch (error) {
-          return errormessage(res,500,error)
-        }
-
-=======
         if(!jobs){
           return errormessage(res,401,`jobs not deleted`)
         }
         else{
           return successmessege(res,201,`all jobs successlfuly deleted`)
         }
->>>>>>> main
       }
 
       static async deleteOnejob(req, res) {
@@ -118,21 +78,9 @@ class jobController{
         } catch (error) {
           return errormessage(res,500,error)
         }
-<<<<<<< HEAD
-
-      } 
-
-=======
-        const jobs = await job.findByIdAndDelete(id);
-        if (!jobs) {
-          errormessage(res, 401, `job with id ${id} not found`);
-        } else {
-          successmessege(res, 200, `job successfuly deleted`, jobs);
-        }
       }
       
->>>>>>> main
-      static async updatejob(req, res) {
+      static async updatejob(req,res){
         const id = req.params.id;
         try {
           if(id.length!==24 || id.length>24){
