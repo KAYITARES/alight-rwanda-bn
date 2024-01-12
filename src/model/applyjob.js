@@ -43,7 +43,7 @@ const ApplyJobSchema=new mongoose.Schema({
      },
     Sex:{
         type:String,
-         required:true
+    enum:["male","female"],
      },
     CurrentPosition:{
          type:String,
