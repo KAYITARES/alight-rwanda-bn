@@ -6,47 +6,48 @@ const jobSchema=new  mongoose.Schema({
         type:String,
         required:true,
     },
-    jobName:{
-        type:String,
-        required:true
-    },
     jobSummaryDescription:{
         type:String,
         required:true
     },
-
     jobAllInfo:{
-
         type:String,
         required:true
     },
-    jobPicture:{
-        type:Array,
+    jobpicture:{
+        type:String,
     },
     jobLocation:{
         type:String,
         required:true
     },
-    postedAt:{
+    jobCriteria:{
+        type:String,
+        required:true
+    },
+    deadLine:{
+        type:Date,
+        required:true
+    },
+
+    publisherDate:{
         type:Date,
         default: new Date(Date.now())
     },
-    jobCriteria:{
-     type:String,
-     required:true   
-    },
-    jobapply:[{
-        type:mongoose.Schema.Types.ObjectId,
-        ref:"ApplyJob"
-    }]
+    jobapply:[
+        {
+          type: mongoose.Schema.Types.ObjectId,
+          ref: "ApplyJob",
+        }
+      ],
+   
+   
+})
+jobSchema.pre(/^find/,function(next){
+    this.populate({
+        path:"jobapply"
     })
-    jobSchema.pre(/^find/, function(next){
-        this.populate({
-            path:"jobapply",
-            select:"FirstName LastName"
-        })
-        next()
-    })
-    
+    next()
+})
 const job=mongoose.model("job",jobSchema)
 export default job
