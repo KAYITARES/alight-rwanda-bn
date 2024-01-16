@@ -25,7 +25,7 @@ class jobController{
           const data = jobs;
           return successmessege(res, status, msg, data);
         }
-        er;
+        
       }
       static async getOnejob(req, res) {
 
