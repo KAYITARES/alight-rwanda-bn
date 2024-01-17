@@ -10,7 +10,7 @@ router.post("/",VerifyAccess("user"),contactUsController.createContact);
 router.get("/",contactUsController.getAllContact)
 router.get("/:id",VerifyAccess("admin"),contactUsController.getOnecontact)
 router.delete("/",contactUsController.deleteAllcontact)
-router.delete("/:id",contactUsController.deleteOnecontact)
+router.delete("/:id",VerifyAccess("admin"),contactUsController.deleteOnecontact)
 
 
 export default router

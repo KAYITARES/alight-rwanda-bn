@@ -43,7 +43,7 @@ static async getOnecontact(req, res) {
    }
   }
   static async deleteAllcontact(req, res) {
-    const Contact = await contactUs.deleteMany();
+    const Contact = await contactUs.deleteMany(res.body);
     if(!Contact){
       return errormessage(res,401,`contact-Us not deleted`)
     }
