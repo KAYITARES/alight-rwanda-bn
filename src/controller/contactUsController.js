@@ -42,6 +42,26 @@ static async getOnecontact(req, res) {
      return errormessage(res, 404, error);
    }
   }
+  static async deleteAllcontact(req, res) {
+    const Contact = await contactUs.deleteMany();
+    if(!Contact){
+      return errormessage(res,401,`contact-Us not deleted`)
+    }
+    else{
+      return successmessege(res,201,`all contact-Us successlfuly deleted`)
+    }
+  }
+
+  static async deleteOnecontact(req, res) {
+    const id = req.params.id;
+    const Contact = await contactUs.findByIdAndDelete(id);
+    if (!Contact) {
+      errormessage(res, 401, `contact-Us with id ${id} not found`);
+    } else {
+      successmessege(res, 200, `contact-Us successfuly deleted`, Contact);
+    }
+  }
+  
 
 }
 export default contactUsController

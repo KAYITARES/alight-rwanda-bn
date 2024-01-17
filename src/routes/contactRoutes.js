@@ -9,6 +9,8 @@ const router=express.Router()
 router.post("/",VerifyAccess("user"),contactUsController.createContact);
 router.get("/",contactUsController.getAllContact)
 router.get("/:id",VerifyAccess("admin"),contactUsController.getOnecontact)
+router.delete("/",contactUsController.deleteAllcontact)
+router.delete("/:id",contactUsController.deleteOnecontact)
 
 
 export default router
