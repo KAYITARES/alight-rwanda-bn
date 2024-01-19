@@ -1,6 +1,8 @@
 import STOCK from "../model/stock";
 import errormessage from "../utils/errormessage";
 import successmessage from "../utils/successmessage";
+import USER from "../model/user";
+import stockEmail from "../utils/stockemail";
 
 class StockController{
     static async ImportProduct(req,res){
@@ -14,6 +16,10 @@ class StockController{
         }
         else{
             const NewStock=await STOCK.create({ProductName,ProductPrice,Qauntity,ProductExpires})
+            const user=await USER.find()
+            user.map((users)=>{
+                stockEmail(users,NewStock)
+            })
             return successmessage(res,201,`Product successfuly Posted`,NewStock)
         }
     } catch (error) {
@@ -56,55 +62,89 @@ class StockController{
 
     static async GetAllStock(req,res){
         const product=await STOCK.find()
-        if(!product){
-            return errormessage(res,401,`Product not found`)
+        try {
+            if(!product){
+                return errormessage(res,401,`Product not found`)
+            }
+            else{
+                return successmessage(res,201,`Product ${product.length} successfuly retrieved`,product)
+            }
+        } catch (error) {
+            return errormessage(res,500,error)
         }
-        else{
-            return successmessage(res,201,`Product ${product.length} successfuly retrieved`,product)
-        }
+
     }
 
     static async DeleteAllStock(req,res){
         const product=await STOCK.deleteMany()
-        if(!product){
-            return errormessage(res,401,`Product not deleted`)
+        try {
+            if(!product){
+                return errormessage(res,401,`Product not deleted`)
+            }
+            else{
+                return successmessage(res,201,`Product successfuly deleted`)
+            }
+        } catch (error) {
+            return errormessage(res,500,error)
         }
-        else{
-            return successmessage(res,201,`Product successfuly deleted`)
-        }
+
     }
 
     static async GetOneProduct(req,res){
         const id=req.params.id
-        const product=await STOCK.findById(id)
-        if(!product){
-            return errormessage(res,401,`Product with id ${id} not found`)
+        try {
+            if(id.length !==24 || id.length <24){
+                return errormessage(res,401,`invalid id`)
+            }
+            const product=await STOCK.findById(id)
+            if(!product){
+                return errormessage(res,401,`Product with id ${id} not found`)
+            }
+            else{
+                return successmessage(res,201,`Product successfuly retrieved`,product)
+            }
+        } catch (error) {
+            return errormessage(res,500,error)
         }
-        else{
-            return successmessage(res,201,`Product successfuly retrieved`,product)
-        }
+
     }
 
     static async DeleteOneProduct(req,res){
         const id=req.params.id
-        const product=await STOCK.findByIdAndDelete(id)
-        if(!product){
-            return errormessage(res,401,`Product with id ${id} not deleted`)
+        try {
+            if(id.length !==24 || id.length <24){
+                return errormessage(res,401,`invalid id`)
+            }
+            const product=await STOCK.findByIdAndDelete(id)
+            if(!product){
+                return errormessage(res,401,`Product with id ${id} not deleted`)
+            }
+            else{
+                return successmessage(res,201,`Product successfuly deleted`)
+            }
+        } catch (error) {
+            return errormessage(res,500,error)
         }
-        else{
-            return successmessage(res,201,`Product successfuly deleted`)
-        }
+
     }
 
     static async UpdateProduct(req,res){
         const id=req.params.id
-        const product=await STOCK.findByIdAndUpdate(id,req.body,{new:true})
-        if(!product){
-            return errormessage(res,401,`Product with id ${id} not found`)
+        try {
+            if(id.length !==24 || id.length <24){
+                return errormessage(res,401,`invalid id`)
+            }
+            const product=await STOCK.findByIdAndUpdate(id,req.body,{new:true})
+            if(!product){
+                return errormessage(res,401,`Product with id ${id} not found`)
+            }
+            else{
+                return successmessage(res,201,`Product successfuly updated`,product)
+            }
+        } catch (error) {
+            return errormessage(res,500,error)
         }
-        else{
-            return successmessage(res,201,`Product successfuly updated`,product)
-        }
+
     }
 }
 

@@ -1,5 +1,7 @@
 import express from  "express";
 import ApplyJobController from "../controller/applyjobcontroller";
+import VerifyAccess from "../middlewares/verifyaccess";
+
 
 const router = express.Router()
 

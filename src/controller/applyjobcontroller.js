@@ -6,6 +6,7 @@ import successmessage  from "../utils/successmessage";
 class ApplyJobController{
     static async ApplyOneJob(req,res){
         const jobid=req.params.id
+        
          const idexisting=await job.findById(jobid)
       if(!idexisting){
         console.log('no job with that id')
@@ -30,7 +31,7 @@ class ApplyJobController{
         const data = jobapply;
         return successmessage(res, status, msg, data);
       }
-     
+      er;
     }
    
      
